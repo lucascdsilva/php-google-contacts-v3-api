@@ -56,9 +56,12 @@ abstract class ContactFactory
                     case 'phoneNumber':
                         $attributes = $value->attributes();
                         $uri = (string) $attributes['uri'];
+                        $node = (array) $value;
+                        $num = reset($node);
+                        
                         $type = substr(strstr($attributes['rel'], '#'), 1);
                         $e164 = substr(strstr($uri, ':'), 1);
-                        $contactDetails[$key][] = ['type' => $type, 'number' => $e164];
+                        $contactDetails[$key][] = ['type' => $type, 'number' => $num];
                         break;
                     default:
                         $contactDetails[$key] = (string) $value;
